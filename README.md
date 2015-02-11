@@ -10,3 +10,7 @@ That curates and promotes local African content with support for both written an
 ######Kana Kanje – an Android application that helps empower and improve the lives of families with premature children.
 
 The application leverages several features unique to mobile devices such as an accelerometer which helps enable parents to monitor their child’s posture. Local context such as intermittent internet connectivity was taken into consideration and, as such, the parents could save records onto their devices and later Bluetooth the report to the doctors.
+
+######The Sample Java
+Some code that was submitted as part of an assignment in the Java for Smartphone Development class.
+The object was to learn how to implement the object oriented nature of Java.
