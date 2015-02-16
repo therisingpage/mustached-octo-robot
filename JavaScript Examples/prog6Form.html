@@ -1,0 +1,100 @@
+<html>
+
+<head>
+</head>
+
+<h3>CMUR "Introduction to Programming" </h3>
+<h4><i>Assignment 6</i>: prog6Form by Lynn Kirabo</h4>
+
+<body>
+<form method="post" name="dataForm" onsubmit = "validateEmail();">
+	<p>
+		Name: 
+		<input type="text" name = "nameField" onchange = "trimSpace(this);" /> 
+	</p>
+	<p>
+		Country of Residence: 
+		<input type="text" name = "countryField" onchange = "allCaps(this);" /> 
+	</p>
+	<p>
+		Birthdate: 
+		<input type="text" name = "bDateField" onchange = "yourAge();" /> 
+	</p>
+    <p id = "ageData">
+		Your age is: XXX years old, YYY in binary, 0xZZZ in hex
+	</p>
+	<p>
+		Email: 
+		<input type="text" name = "emailField" /> 
+	</p>
+	<p>
+		Tell us your favorite Cards: 
+		<input type="text" name = "fCardsField" onchange = "card();" /> 
+	</p>
+	<p id = "favCard"></p>
+    <p>
+		<input type="submit" value="Submit"/> 
+	</p>
+
+</form>
+<script src = "prog6Form.js"></script>
+<script src = "validate.js"></script>
+<script src = "dateUtils.js"></script>
+<script src = "arrayUtils.js"></script>
+<script src = "conversionUtils.js"></script>
+<script src = "padUtils.js"></script>
+<script src = "cardUtils.js"></script>
+<script language = "Javascript">
+var cardStore = [];
+var data = document.forms["dataForm"];
+var dateField = data.elements["bDateField"];
+var ageStuff = document.getElementById("ageData");
+function yourAge()
+{
+	var decAge = ageCalculations(dateField);
+	var binAge = convertDecToBin(decAge);
+	var hexAge = convertBinToHex(binAge);
+	ageStuff.innerHTML = "Your age is: " + decAge + " years old," + binAge + " in binary, 0x"+ hexAge +" in hex";
+}
+
+function card()
+{
+var favCards = data.elements["fCardsField"];
+var favCardsValue = favCards.value;
+var cardInFull = getFullName(favCardsValue);
+cardStore.push(cardInFull);
+
+var len = cardStore.length;
+var displayCard = "";
+var i;
+
+for ( i = 0; i < len; i++ )
+	{
+		displayCard += cardStore[i] +", "; 
+	}
+	
+	favCard.innerHTML = displayCard;
+}
+
+function validateEmail()
+{
+	var sortCards = sortArray(cardStore);
+	var validEmailField = data.elements["emailField"];
+	var validEmail = validEmailField.value;
+	var name = data.elements["nameField"];
+	var country = data.elements["countryField"];
+	var age = data.elements["bDateField"];
+	
+	
+	if (!isValidEmail(validEmail))
+	{
+		alert("The eMail address you entered is WRONG!");
+	}
+	else
+	{
+		alert("Thank you! \n\n Your Name: " + name.value + "\n\n Your Country: " + country.value + "\n\n Your Birthdate: " + age.value + "\n\n Your eMail: " + validEmail + "\n\n" + cardStore );
+	}
+}
+</script>
+</body>
+</html>
